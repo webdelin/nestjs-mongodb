@@ -1,1 +1,1 @@
-# NestJs Typescript + Sequelize
+# NestJs Typescript + Sequelize RESTAPI Server
