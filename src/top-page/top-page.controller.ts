@@ -4,7 +4,7 @@ import { TopPageModel } from './top-page.model';
 
 @Controller('top-page')
 export class TopPageController {
-		@Post('create')
+	@Post('create')
 	async create(@Body() dto: Omit<TopPageModel, 'id'>){
 
 	}
