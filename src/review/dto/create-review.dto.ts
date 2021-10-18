@@ -10,8 +10,8 @@ export class CreateReviewDto {
   @IsString()
   description: string;
 
-  @Min(1)
   @Max(5)
+  @Min(1, { message: 'Review spll nich kleiner 1 sein' })
   @IsNumber()
   rating: number;
 

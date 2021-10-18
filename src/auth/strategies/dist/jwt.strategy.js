@@ -1,12 +1,22 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -45,42 +55,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.ReviewService = void 0;
+exports.JwtStrategy = void 0;
 var common_1 = require("@nestjs/common");
-var mongoose_1 = require("mongoose");
-var nestjs_typegoose_1 = require("nestjs-typegoose");
-var review_model_1 = require("./review.model");
-var ReviewService = /** @class */ (function () {
-    function ReviewService(reviewModel) {
-        this.reviewModel = reviewModel;
+var passport_1 = require("@nestjs/passport");
+var passport_jwt_1 = require("passport-jwt");
+var JwtStrategy = /** @class */ (function (_super) {
+    __extends(JwtStrategy, _super);
+    function JwtStrategy(configService) {
+        var _this = _super.call(this, {
+            jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
+            ignoreExpiration: true,
+            secretOrKey: configService.get('JWT_SECRET')
+        }) || this;
+        _this.configService = configService;
+        return _this;
     }
-    ReviewService.prototype.create = function (dto) {
-        return __awaiter(this, void 0, Promise, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.reviewModel.create(dto)];
+    JwtStrategy.prototype.validate = function (_a) {
+        var email = _a.email;
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_b) {
+                return [2 /*return*/, email];
             });
         });
     };
-    ReviewService.prototype["delete"] = function (id) {
-        return __awaiter(this, void 0, Promise, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.reviewModel.findByIdAndDelete(id).exec()];
-            });
-        });
-    };
-    ReviewService.prototype.findByProductId = function (productId) {
-        return __awaiter(this, void 0, Promise, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.reviewModel
-                        .find({ productId: new mongoose_1.Types.ObjectId(productId) })
-                        .exec()];
-            });
-        });
-    };
-    ReviewService = __decorate([
-        common_1.Injectable(),
-        __param(0, nestjs_typegoose_1.InjectModel(review_model_1.ReviewModel))
-    ], ReviewService);
-    return ReviewService;
-}());
-exports.ReviewService = ReviewService;
+    JwtStrategy = __decorate([
+        common_1.Injectable()
+    ], JwtStrategy);
+    return JwtStrategy;
+}(passport_1.PassportStrategy(passport_jwt_1.Strategy)));
+exports.JwtStrategy = JwtStrategy;

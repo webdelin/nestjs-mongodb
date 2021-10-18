@@ -1,5 +1,12 @@
 # NestJs Typescript + MongoDB RESTAPI Server
 
+## e2e Tests
+yarn test:e2e
+
+### Success
+auth.e2e-spec.ts
+review.e2e-spec.ts
+
 ## Debuging
 
 ### Autocannon
