@@ -45,42 +45,61 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.ReviewService = void 0;
+exports.ReviewController = void 0;
 var common_1 = require("@nestjs/common");
-var mongoose_1 = require("mongoose");
-var nestjs_typegoose_1 = require("nestjs-typegoose");
-var review_model_1 = require("./review.model");
-var ReviewService = /** @class */ (function () {
-    function ReviewService(reviewModel) {
-        this.reviewModel = reviewModel;
+var jwt_guard_1 = require("./../auth/guards/jwt.guard");
+var review_constants_1 = require("./review.constants");
+var ReviewController = /** @class */ (function () {
+    function ReviewController(reviewService) {
+        this.reviewService = reviewService;
     }
-    ReviewService.prototype.create = function (dto) {
-        return __awaiter(this, void 0, Promise, function () {
+    ReviewController.prototype.create = function (dto) {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.reviewModel.create(dto)];
+                return [2 /*return*/, this.reviewService.create(dto)];
             });
         });
     };
-    ReviewService.prototype["delete"] = function (id) {
-        return __awaiter(this, void 0, Promise, function () {
+    ReviewController.prototype.getByProduct = function (productId) {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.reviewModel.findByIdAndDelete(id).exec()];
+                return [2 /*return*/, this.reviewService.findByProductId(productId)];
             });
         });
     };
-    ReviewService.prototype.findByProductId = function (productId) {
-        return __awaiter(this, void 0, Promise, function () {
+    ReviewController.prototype["delete"] = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var deletedDoc;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.reviewModel
-                        .find({ productId: new mongoose_1.Types.ObjectId(productId) })
-                        .exec()];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.reviewService["delete"](id)];
+                    case 1:
+                        deletedDoc = _a.sent();
+                        if (!deletedDoc) {
+                            throw new common_1.HttpException(review_constants_1.REVIEW_NOT_FOUND, common_1.HttpStatus.NOT_FOUND);
+                        }
+                        return [2 /*return*/];
+                }
             });
         });
     };
-    ReviewService = __decorate([
-        common_1.Injectable(),
-        __param(0, nestjs_typegoose_1.InjectModel(review_model_1.ReviewModel))
-    ], ReviewService);
-    return ReviewService;
+    __decorate([
+        common_1.UsePipes(new common_1.ValidationPipe()),
+        common_1.Post('create'),
+        __param(0, common_1.Body())
+    ], ReviewController.prototype, "create");
+    __decorate([
+        common_1.Get('byProduct/:productId'),
+        __param(0, common_1.Param('productId'))
+    ], ReviewController.prototype, "getByProduct");
+    __decorate([
+        common_1.UseGuards(jwt_guard_1.JwtAuthGuard),
+        common_1.Delete(':id'),
+        __param(0, common_1.Param('id'))
+    ], ReviewController.prototype, "delete");
+    ReviewController = __decorate([
+        common_1.Controller('review')
+    ], ReviewController);
+    return ReviewController;
 }());
-exports.ReviewService = ReviewService;
+exports.ReviewController = ReviewController;
