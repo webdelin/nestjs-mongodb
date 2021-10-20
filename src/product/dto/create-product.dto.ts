@@ -8,8 +8,8 @@ class ProductCharacteristicDto {
 	@IsString()
 	value: string;
 }
-export class CreateProductDto {
 
+export class CreateProductDto {
 	@IsString()
 	image: string;
 
@@ -33,18 +33,18 @@ export class CreateProductDto {
 	advantages: string;
 
 	@IsString()
-	disAdventages: string;
+	disAdvantages: string;
 
 	@IsArray()
-	@IsString()
+	@IsString({ each: true })
 	categories: string[];
 
 	@IsArray()
-	@IsString({each: true})
+	@IsString({ each: true })
 	tags: string[];
 
 	@IsArray()
 	@ValidateNested()
-	@Type(()=> ProductCharacteristicDto)
+	@Type(() => ProductCharacteristicDto)
 	characteristics: ProductCharacteristicDto[];
 }

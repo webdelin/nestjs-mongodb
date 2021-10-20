@@ -7,14 +7,14 @@ import { UserModel } from '../user.model';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly configService: ConfigService) {
-    super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: true,
-      secretOrKey: configService.get('JWT_SECRET'),
-    });
+	super({
+		jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+		ignoreExpiration: true,
+		secretOrKey: configService.get('JWT_SECRET'),
+	});
   }
 
   async validate({ email }: Pick<UserModel, 'email'>) {
-    return email;
+	return email;
   }
 }
