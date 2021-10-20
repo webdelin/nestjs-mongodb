@@ -1,8 +1,8 @@
 version: '3'
 services:
   nest.mongo.api:
-    image: 'nest-mongo-api:latest'
-    container_name: nest-mongo-api
+    image: 'docker.pkg.github.com/webdelin/nestjs-mongodb-restapi-ts/nestjs-mongodb-restapi-ts:develop'
+    container_name: nestjs-mongodb-restapi-ts
     restart: always
     ports:
       - '3000:3000'
