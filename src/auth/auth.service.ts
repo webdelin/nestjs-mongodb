@@ -10,8 +10,8 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(UserModel) private readonly userModel: ModelType<UserModel>,
-    private readonly jwtService: JwtService,
+      @InjectModel(UserModel) private readonly userModel: ModelType<UserModel>,
+      private readonly jwtService: JwtService,
   ) {}
   async createUser(dto: AuthDto) {
     const salt = genSaltSync(10);
@@ -27,8 +27,8 @@ export class AuthService {
   }
 
   async validateUser(
-    email: string,
-    password: string,
+      email: string,
+      password: string,
   ): Promise<Pick<UserModel, 'email'>> {
     const user = await this.findUser(email);
     if (!user) {

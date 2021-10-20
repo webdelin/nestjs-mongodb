@@ -10,7 +10,6 @@ class ProductCharacteristic {
 
 export interface ProductModel extends Base { }
 export class ProductModel extends TimeStamps {
-
 	@prop()
 	image: string;
 
@@ -33,7 +32,7 @@ export class ProductModel extends TimeStamps {
 	advantages: string;
 
 	@prop()
-	disAdventages: string;
+	disAdvantages: string;
 
 	@prop({ type: () => [String] })
 	categories: string[];
@@ -44,3 +43,4 @@ export class ProductModel extends TimeStamps {
 	@prop({ type: () => [ProductCharacteristic], _id: false })
 	characteristics: ProductCharacteristic[];
 }
+

@@ -18,18 +18,18 @@ export class AuthController {
   @UsePipes(new ValidationPipe())
   @Post('register')
   async register(@Body() dto: AuthDto) {
-    const oldUser = await this.authServece.findUser(dto.login);
-    if (oldUser) {
-      throw new BadRequestException(ALREADY_REGISTRED_ERROR);
-    }
-    return this.authServece.createUser(dto);
+	const oldUser = await this.authServece.findUser(dto.login);
+	if (oldUser) {
+		throw new BadRequestException(ALREADY_REGISTRED_ERROR);
+	}
+	return this.authServece.createUser(dto);
   }
 
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Post('login')
   async login(@Body() { login, password }: AuthDto) {
-    const { email } = await this.authServece.validateUser(login, password);
-    return this.authServece.login(email);
+	const { email } = await this.authServece.validateUser(login, password);
+	return this.authServece.login(email);
   }
 }
