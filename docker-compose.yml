@@ -1,0 +1,10 @@
+version: '3'
+services:
+  nest.mongo.api:
+    image: 'nest-mongo-api:latest'
+    container_name: nest-mongo-api
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - './.env:/opt/app.env'

@@ -36,3 +36,7 @@ npm i -g clinic
 npm run buid
 
 clinic doctor --on-port 'autocannon localhost:$PORT//api/review/byProduct/12d031a3-ac5c-4200' -- node dist/main.js
+
+
+## GitHub -Actions
+https://github.com/elgohr/Publish-Docker-Github-Action
