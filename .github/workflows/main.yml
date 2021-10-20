@@ -16,7 +16,7 @@ jobs:
         uses: elgohr/Publish-Docker-Github-Action@main
         with:
           registry: docker.pkg.github.com
-          name: docker.pkg.github.com/webdelin/nestjs-mongodb-restapi-ts/nestjs-mongodb-restapi-ts:develop
+          name: docker.pkg.github.com/webdelin/nestjs-mongodb-restapi-ts/nestjs-mongodb-restapi-ts
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tags: "develop"
