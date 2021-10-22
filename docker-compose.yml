@@ -1,6 +1,6 @@
 version: '3'
 services:
-  nestjs.mongo.restapi.ts:
+  nestjs.restapi:
     image: docker.pkg.github.com/webdelin/nestjs-mongodb-restapi-ts/nestjs-mongodb-restapi-ts:develop
     container_name: nestjs-mongodb-restapi-ts
     restart: always
