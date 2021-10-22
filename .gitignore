@@ -4,6 +4,7 @@
 /uploads
 .clinic
 .env
+TOKEN.txt
 # Logs
 logs
 *.log
